@@ -1,9 +1,17 @@
 name: build
 on:
   push:
+    branches: [ "master" ]
+    paths-ignore:
+      - 'README.md'
   pull_request:
-  schedule:
-    - cron: "0 0 * * *"
+    branches: [ "master" ]
+
+env:
+  CARGO_INCREMENTAL: 0
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-Dwarnings"
+
 jobs:
   build-test-lint-linux:
     name: Linux - FFmpeg ${{ matrix.ffmpeg_version }} - build, test and lint
